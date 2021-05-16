@@ -13,8 +13,9 @@ CMap::CMap(int num_of_tanks,int Player_tank,int height, int width)
     this->WIDTH=width;
     this->num_of_tanks=num_of_tanks; // how many tanks repsawn
     this->Player_tank=Player_tank;
- //   BuildStaticObjectMap();
     BuildMovableObjectMap();
+    BuildStaticObjectMap();
+
 
 }
 
@@ -26,7 +27,7 @@ std::deque<ICObject *> CMap::getObjectInRange(ICObject *main_obj)
           double x2=qPow(object->getPos_X() - main_obj->getPos_X(),2);
           double y2=qPow(object->getPos_Y()-main_obj->getPos_Y(),2);
           if(qSqrt(x2+y2)<static_cast<ICMovableObject*>(main_obj)->get_Range()+5){
-                   object->set_visible(true);
+                  object->set_visible(true);
                   neighbors.push_front(object);
           }else{
                 object->set_visible(true);
@@ -43,7 +44,7 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
      bool end= false;
      bool unique=false;
      int iter=0;
-     int range=200;
+     int range=250;
      do{
          pos_X= QRandomGenerator::global()->bounded(0,HEIGHT);
          pos_Y=QRandomGenerator::global()->bounded(0,WIDTH);
@@ -61,16 +62,16 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
      }while(!end);
 }
 
-void CMap::BuildStaticObjectMap()
+void CMap::BuildStaticObjectMap() // statc objects are always being added to the  end of deque
 {
-   //  std::deque <ICObject*> FGObjectList;
     for (int i = 0 ; i <num_of_tanks;i++){
-       int pos_X= QRandomGenerator::global()->bounded(0,HEIGHT);
-       int pos_Y=QRandomGenerator::global()->bounded(0,WIDTH);
-        CImprovements *improv= new  CImprovements();
-    //   CGImprovements *gui_improv= new CGImprovements(improv);
-     //  this->FObjectList.push_back(improv);
-     //  this->FGObjectList.push_back(gui_improv);
+       int pos_X=0, pos_Y=0;
+       freeSpot( pos_X,  pos_Y);
+       CImprovements *improv= new  CImprovements();
+       improv->setPosition(pos_X,pos_Y);
+       CGImprovements *gui_improv= new CGImprovements(improv);
+       this->FObjectList.push_back(improv);
+       this->FGObjectList.push_back(gui_improv);
     }
 }
 void CMap::BuildMovableObjectMap()
@@ -90,9 +91,6 @@ void CMap::BuildMovableObjectMap()
     }
 
 }
-
-
-
 void CMap::setPlayerToTank()
 {
     int pos_X,pos_Y;
@@ -149,45 +147,6 @@ void CMap::ObjHandler()
     }
     this->FObjectList.erase(std::remove(FObjectList.begin(), FObjectList.end(), nullptr), FObjectList.end());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//      std::deque < ICObject*>::iterator it;
-//      std::deque < ICGObject*>::iterator it_g;
-//     for( it = FObjectList.begin(); it != FObjectList.end();){
-//           if((*it)->get_to_delete()){
-//               FObjectList.erase(it);
-//               delete *it;
-//           } else{
-//               ++it;
-//           }
-//      }
-//     for( it_g = FGObjectList.begin(); it_g != FGObjectList.end();){
-//           if((*it_g)->get_to_delete()){
-//               FGObjectList.erase(it_g);
-//              delete  *it_g;
-//                qDebug()<<&it_g;
-
-//           }else{
-//               ++it_g;
-//           }
-//      }
-//    qDebug()<<"Inside objects";
-//    qDebug()<<FObjectList.size();
-//    qDebug()<<"GUI Objects";
-//    qDebug()<<FGObjectList.size();
-
 
 
 

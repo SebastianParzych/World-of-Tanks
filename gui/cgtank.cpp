@@ -1,13 +1,12 @@
 #include "cgtank.h"
-#include <QGraphicsScene>
-#include <QPainter>
+
 #include <QRandomGenerator>
 #include <QStyleOption>
 #include <QtMath>
 #include <QDebug>
 #include "cgshell.h"
 #include <qrandom.h>
-
+#include <gui\cgimprovements.h>
 
 constexpr qreal Pi = M_PI;
 constexpr qreal TwoPi = 2 * M_PI;
@@ -136,6 +135,12 @@ void CGTank::Collision_recived( QList <QGraphicsItem*> items)
             this->collision_tank=true;
             tank->collision_mov(item->x(), item->y());
 
+        }
+        if( item== dynamic_cast<CGImprovements*>(item)){
+            CImprovements *improv=static_cast<CGImprovements*>(item)->get_improv();
+            if(improv->get_Open()) continue;
+            tank->manage_improv(improv);
+            improv->set_Open(true);
         }
     }
 

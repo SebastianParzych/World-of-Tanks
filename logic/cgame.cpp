@@ -12,8 +12,6 @@ CGame::CGame(int player_num,int TankType, int height, int width)  {
         timer.start(1000 / 33);
 }
 
-
-
 void CGame::step(){
     map->update();
 }

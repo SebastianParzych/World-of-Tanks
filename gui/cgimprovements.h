@@ -8,7 +8,7 @@ class CGImprovements: public ICGObject
 public:
     CGImprovements(CImprovements *improv);
     ~ CGImprovements(){
-            qDebug()<<"Improv deleted";
+            qDebug()<<"CGImprov deleted";
     };
     void advance (int step) override;
     QRectF  boundingRect()const override;
@@ -17,13 +17,11 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
-    CImprovements* get_improv( QList <QGraphicsItem*> items){
+    CImprovements* get_improv( ){
         return this->improv;
     }
-    bool is_Player(){return false;}
-protected:
-    void  Collision_recived( QList <QGraphicsItem*> items) override;
 private:
+    QColor color;
     CImprovements *improv;
 };
 

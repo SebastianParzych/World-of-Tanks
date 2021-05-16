@@ -26,6 +26,9 @@ void CShell::move()
     if(!hit){
     this->pos_x+=-cos(Direction)*Shell_speed;
     this->pos_y+=-sin(Direction)*Shell_speed;
+        if(pos_x>2000 or pos_x<-100 or pos_y<-100 or pos_y>1000){ // force to back to map
+               this->set_to_delete(true);
+        }
     }else{
         this->set_to_delete(true);
     }

@@ -9,8 +9,7 @@ public:
     ICStaticObject();
     virtual ~ ICStaticObject()= default;
     virtual void update ()=0;
-private:
-    bool isImprovement;
+
 };
 
 #endif // ICSTATICOBJECT_H

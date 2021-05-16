@@ -5,7 +5,7 @@
 #include "gui\cgshell.h"
 #include "icmovableobject.h"
 #include <QTimer>
-
+#include "cimprovements.h"
 class CTank: public ICMovableObject
 {
 public:
@@ -33,11 +33,14 @@ public:
     int collision_mov(double x , double y); // when QgraphicsItem detec coll witth eg. tank can not move foward.
     void reset_limitations();
     QMap<QString, float> getTankStats();
+    void avoid_collision(ICObject* enemy, float dx, float dy);
     void set_wreck(bool wreck){this->wreck=wreck;}
     bool get_wreck(){return wreck;}
+    void manage_improv(CImprovements *improv);
 private:
+
     bool wreck=false;
-    CTank *closest_enemy;
+    CTank *focused_enemy;
     QMap <int,bool> limitations;
     bool player=false;
     CShell *shell;

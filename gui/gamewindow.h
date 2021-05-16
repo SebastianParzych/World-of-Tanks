@@ -26,6 +26,7 @@ public:
     void AddObjects();
 
 private:
+    bool set =false;
     int tank_type=0;
     bool current_window=false;
     QTimer *timer;

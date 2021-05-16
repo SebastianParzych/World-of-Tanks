@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QGraphicsScene>
 
 class ICGObject: public QGraphicsRectItem
 {
@@ -17,8 +18,8 @@ public:
     bool get_to_delete(){return this->TO_DELETE;}
     void set_to_delete(bool del){this->TO_DELETE=del;}
 protected:
-     int explosion_time;
-     void virtual Collision_recived( QList <QGraphicsItem*> items)=0;
+     int explosion_time=0;
+
      bool TO_DELETE=false;
      bool collision_tank=false;
      bool collision_shell=false;
