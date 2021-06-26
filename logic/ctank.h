@@ -19,6 +19,7 @@ public:
     void move ( int y,int rotation, int turretRotation);
     void shot();
     void update() override;
+    void Collision_detection(QList <QGraphicsItem*> items) override;
     void set_TankType(int TankType){ this->TankType=TankType;}
     int get_TankType(){   return TankType;}
     void set_Player(bool player){    this->player=player;}
@@ -30,7 +31,7 @@ public:
     qreal get_TurretRotation(){return this->TurretRotation;}
     int get_View_range(){ return this->view_range;}
     CShell* get_shell(){ return this->shell;}
-    int collision_mov(double x , double y); // when QgraphicsItem detec coll witth eg. tank can not move foward.
+    int collision_mov(double x , double y); // when QgraphicsItem detec collision witth eg. tank can not move foward.
     void reset_limitations();
     QMap<QString, float> getTankStats();
     void avoid_collision(ICObject* enemy, float dx, float dy);
@@ -59,7 +60,6 @@ private:
     float reload_time;
     int penetration;
     int points;
-    double angle;
     int last_shot=0;
     int curr_reload=0;
 };

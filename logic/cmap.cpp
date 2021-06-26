@@ -48,7 +48,7 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
      do{
          pos_X= QRandomGenerator::global()->bounded(0,HEIGHT);
          pos_Y=QRandomGenerator::global()->bounded(0,WIDTH);
-         if(iter%=10) range-=10;
+         if(iter%=10) range-=20;
          if(FObjectList.size()==0)return;
          for (ICObject* object: FObjectList) {
                double x2=qPow(object->getPos_X() - pos_X,2);

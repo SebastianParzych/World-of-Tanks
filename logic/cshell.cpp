@@ -1,5 +1,6 @@
 #include "cshell.h"
 #include <QDebug>
+#include "gui/cgtank.h"
 
 
 constexpr qreal Pi = M_PI;
@@ -7,6 +8,9 @@ constexpr qreal TwoPi = 2 * M_PI;
 
 CShell::CShell(int pos_x,int pos_y,qreal TankRotation,qreal TurretRotation,int penetration,int dmg, qreal Shell_speed)
 {
+    width =15;
+    height= 15;
+    map_corners();
     this->view_range=1;
     this->RotationXY=TankRotation;
     this->TurretRotation=TurretRotation;
@@ -19,6 +23,7 @@ CShell::CShell(int pos_x,int pos_y,qreal TankRotation,qreal TurretRotation,int p
     TurretRotation=TurretRotation*M_PI/180;
     Direction=RotationXY+TurretRotation;
 }
+
 
 void CShell::move()
 {
@@ -36,5 +41,20 @@ void CShell::move()
 
 void CShell::update()
 {
-        move();
+    move();
+}
+
+void CShell::Collision_detection(QList<QGraphicsItem *> items)
+{
+    foreach(QGraphicsItem *item,items){
+        if(item == dynamic_cast<CGTank*>(item)){
+            if(this==static_cast<CGTank*>(item)->getTank()->get_shell()){
+                this->collision_shell=false;
+            }else{
+             if(this->get_hit()) continue; // Preventing to be hitted multiple times by shell;
+             set_hit(true);
+             static_cast<CGTank*>(item)->getTank()->set_CurHealth(-this->get_Dmg());
+            }
+        }
+    }
 }

@@ -4,6 +4,8 @@
 #include <QRandomGenerator>
 #include <logic\cmap.h>
 #include <cmath>
+#include "gui/cgimprovements.h"
+#include "gui/cgtank.h"
 constexpr qreal Pi = M_PI;
 constexpr qreal TwoPi = 2 * M_PI;
 
@@ -30,15 +32,7 @@ CTank::CTank(int TankType, bool isplayer) {
     limitations[0]=true;
     limitations[1]=true;
 }
-static qreal normalizeAngle(qreal angle)
-{
-    if (angle >= 360)
-        angle =0;
-    else if (angle <= -360)
-        angle= 0;
 
-    return angle;
-}
 
 void CTank::move()
 {
@@ -78,10 +72,6 @@ void CTank::move()
         double x1 = pos_x-FMap->get_Height()/2;
         double y1=  pos_y-FMap->get_Width()/2;
         double angle=qAtan2(y1,x1)*180/M_PI;
-         qDebug()<<"RotationXY";
-          qDebug()<<RotationXY;
-        qDebug()<<"ANAGLE";
-         qDebug()<<angle;
         if((normalizeAngle(RotationXY+1) - angle) <- 30 )x=1;
         else if((normalizeAngle(RotationXY-1) -angle) > 30) x=-1;
         else{
@@ -150,7 +140,8 @@ void CTank::avoid_collision(ICObject* enemy, float  dx, float dy)
 
 
 void CTank::move( int y, int rotation, int  turretRotation)
-{  
+{
+    if(wreck) return;
     angle=(normalizeAngle(RotationXY))*M_PI/180;
     switch(y){
     case 1: // go reverse
@@ -199,6 +190,39 @@ void CTank::shot()
     shell->set_Map(FMap);
     last_shot=clock();
 }
+void CTank::Collision_detection(QList<QGraphicsItem *> items)
+{
+    foreach(QGraphicsItem *item,items){
+        if(item == dynamic_cast<CGShell*>(item)){
+            if(this->get_shell()== static_cast<CGShell*>(item)->get_Shell()) continue;// shell is made inside tank, so ignore parent tank
+            this->collision_shell=true;
+        }
+        if( item== dynamic_cast<CGTank*>(item)){
+            this->collision_tank=true;
+            this->collision_mov(item->x(), item->y());
+        }
+        if( item== dynamic_cast<CGImprovements*>(item)){
+            CImprovements *improv=static_cast<CGImprovements*>(item)->get_improv();
+            if(improv->get_Open()) continue;
+            this->manage_improv(improv);
+            improv->set_Open(true);
+        }
+    }
+
+    if(collision_tank){
+                bool release=true;
+                foreach(QGraphicsItem *item,items){
+                    if( item== dynamic_cast<CGTank*>(item)){
+                            release=false;
+                            break;
+                    }
+                }
+                if(release){
+                     collision_tank=false;
+                     this->reset_limitations();
+                }
+    }
+}
 
 void CTank::update()
 {
@@ -237,6 +261,8 @@ void CTank::SetParams(int TankType)
         this->penetration=219;
         this->Shell_speed=12;
         this->view_range=300;
+        this->height=50;
+        this->width=40;
         break;
     case 1: // Medmium
         this->MAX_HEALTH=2000;
@@ -252,6 +278,8 @@ void CTank::SetParams(int TankType)
         this->penetration=219;
         this->Shell_speed=12;
         this->view_range=400;
+        this->height=50;
+        this->width=32;
         break;
     case 2: // Light
         this->MAX_HEALTH=1500;
@@ -267,6 +295,8 @@ void CTank::SetParams(int TankType)
         this->penetration=219;
         this->Shell_speed=12;
         this->view_range=500;
+        this->height=40;
+        this->width=30;
         break;
     }
 }
@@ -291,8 +321,6 @@ QMap<QString, float> CTank::getTankStats()
 }
 void CTank::manage_improv(CImprovements *improv)
 {
-    qDebug()<<improv->get_stat();
-    qDebug()<<improv->get_upgrade();
     switch (improv->get_stat()) {
     case 0:
         this->MAX_HEALTH*=improv->get_upgrade();
@@ -363,10 +391,5 @@ void CTank::manage_improv(CImprovements *improv)
 
 
 }
-
-
-
-
-
 
 

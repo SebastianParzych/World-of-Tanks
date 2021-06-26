@@ -17,12 +17,8 @@ public:
                QWidget *widget) override;
     CShell* get_Shell(){return this->shell;}
 private:
-    void  Collision_recived( QList <QGraphicsItem*> items);
     int last_x;
     int last_y;
-    bool collision_tank=false;
-    bool collision_shell=false;
-    bool collision_static_object=false;
     CShell *shell;
     qreal Direction=0;
     qreal speed=5;

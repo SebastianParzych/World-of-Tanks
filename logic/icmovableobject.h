@@ -5,7 +5,7 @@
 #include "icobject.h"
 #include <cmath>
 #include <QtGlobal>
-
+#include <QGraphicsItem>
 
 
 class CMap;
@@ -18,6 +18,7 @@ public:
     virtual ~ ICMovableObject()= default;
     virtual void move ()=0;
     virtual void update()=0;
+    virtual void Collision_detection(QList <QGraphicsItem*> items)=0;
     void set_speed(int speed){this->speed=speed;}
     int get_speed(){return this->speed;}
     void set_RotationXY(float RotationXY){this->RotationXY=RotationXY;}
@@ -27,7 +28,13 @@ public:
     int get_Range(){return this->view_range;}
     int get_Dmg(){ return this->dmg;}
     void set_Dmg(){this->dmg=dmg;}
+    bool get_collsion_shell(){ return this->collision_shell;}
+    void set_collision_shell(bool set){this->collision_shell=set;}
+    bool get_collsion_tank(){ return this->collision_tank;}
+    void set_collision_tank(bool set){this->collision_tank=set;}
 protected:
+    bool collision_shell=false;
+    bool collision_tank=false;
     int dmg;
     int view_range;
     double speed;

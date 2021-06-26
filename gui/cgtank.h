@@ -17,7 +17,6 @@ public:
     QPainterPath shape()  const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
-
     void setTank (CTank *tank){ this->tank=tank;}
     CTank* getTank() const { return this->tank;}
     bool get_Player(){return tank->get_Player();}
@@ -25,15 +24,12 @@ public:
 
 
 private:
-    void  Collision_recived( QList <QGraphicsItem*> items);
     CTank *tank;
     qreal tankAngle = 0;
     qreal turretAngle=0;
     qreal TurretRotatio=0;
     qreal Direction=0;
     qreal speed=5;
-
-
     QColor turret;
     QColor body;
     QColor canister;

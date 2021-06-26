@@ -305,7 +305,7 @@
      <x>0</x>
      <y>0</y>
      <width>786</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
@@ -314,34 +314,34 @@
  <resources/>
  <connections>
   <connection>
-   <sender>Shells</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label_2</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>348</x>
-     <y>539</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>404</x>
-     <y>544</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>Health</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>303</x>
-     <y>561</y>
+     <x>518</x>
+     <y>477</y>
     </hint>
     <hint type="destinationlabel">
-     <x>298</x>
-     <y>551</y>
+     <x>558</x>
+     <y>476</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Shells</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_2</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>511</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>554</x>
+     <y>514</y>
     </hint>
    </hints>
   </connection>

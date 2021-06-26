@@ -56,25 +56,8 @@ CGTank::CGTank(int tanktype)
 
 void CGTank::advance(int step)
 {
-
     QList <QGraphicsItem*> items=scene()->collidingItems(this); // checking collisions
-    if(collision_tank){ // allow to move tank without limits
-
-        bool release=true;
-        foreach(QGraphicsItem *item,items){
-            if( item== dynamic_cast<CGTank*>(item)){
-                    release=false;
-                    break;
-            }
-        }
-        if(release){
-             collision_tank=false;
-             tank->reset_limitations();
-        }
-    }
-    if(!items.isEmpty()){
-        Collision_recived(items);
-    }
+    tank->Collision_detection(items);
 
     int x=tank->getPos_X();
     int y=tank->getPos_Y();
@@ -109,9 +92,7 @@ QRectF CGTank::boundingRect() const
     case 2:
         return QRectF(-10 - adjust, -22 - adjust,
                       30 + adjust, 45 + adjust);
-
     }
-
 }
 
 QPainterPath CGTank::shape() const
@@ -120,33 +101,6 @@ QPainterPath CGTank::shape() const
     path.addRect(boundingRect());
     return path;
 }
-
-
-
-void CGTank::Collision_recived( QList <QGraphicsItem*> items)
-{
-    foreach(QGraphicsItem *item,items){
-        if(item == dynamic_cast<CGShell*>(item)){
-            if(tank->get_shell()== static_cast<CGShell*>(item)->get_Shell()) continue;// shell is made inside tank, so ignore parent tank
-            this->explosion_time=clock();
-            this->collision_shell=true;
-        }
-        if( item== dynamic_cast<CGTank*>(item)){
-            this->collision_tank=true;
-            tank->collision_mov(item->x(), item->y());
-
-        }
-        if( item== dynamic_cast<CGImprovements*>(item)){
-            CImprovements *improv=static_cast<CGImprovements*>(item)->get_improv();
-            if(improv->get_Open()) continue;
-            tank->manage_improv(improv);
-            improv->set_Open(true);
-        }
-    }
-
-}
-
-
 
 void CGTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
@@ -286,12 +240,6 @@ void CGTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget 
         cupola=QColor(89, 89, 89);
         fenders=QColor(89, 89, 89);
         }
-
-
-
-//        painter->setPen(Qt::NoPen);
-//        painter->drawEllipse(-125,-125,tank->get_View_range(),tank->get_View_range());
-
 }
 
 

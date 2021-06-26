@@ -1,3 +1,4 @@
+
 #include "cgimprovements.h"
 #include <QStyleOption>
 CGImprovements::CGImprovements(CImprovements *improv)
@@ -29,7 +30,7 @@ QPainterPath CGImprovements::shape() const
 void CGImprovements::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {   if(!improv->get_Open()){
         painter->setBrush(QColor(254, 166, 0)); // wood
-        painter->drawRect(0, 0, 30, 20);
+        painter->drawRect(0,0, 30, 20);
 
         painter->setBrush(QColor(58, 165, 254)); // detail 1
         painter->drawRect(0, 8, 30,6);
@@ -38,7 +39,7 @@ void CGImprovements::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
         painter->drawRect(11, 7, 8,8);
     }else{
         painter->setBrush(QColor(254, 166, 0));  // wood
-        painter->drawRect(0, 0, 30, 25);
+        painter->drawRect(0,0, 30, 25);
         painter->drawRect(0, -10, 30, 10); // movable part
 
         painter->setBrush(QColor(50, 50, 50));
