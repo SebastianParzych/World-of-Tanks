@@ -33,7 +33,7 @@ CGTank::CGTank(CTank *tank): tank(tank), tankAngle(tank->get_RotationXY()),
         cupola=QColor(102, 0, 0);
         fenders=QColor(153, 51, 0);
     }
-     setPos(tank->getPos_X(),tank->getPos_Y());
+     setPos(tank->get_pos_x(),tank->get_pos_y());
      setRotation(Direction);
      explosion_time=0;
 }
@@ -59,8 +59,8 @@ void CGTank::advance(int step)
     QList <QGraphicsItem*> items=scene()->collidingItems(this); // checking collisions
     tank->Collision_detection(items);
 
-    int x=tank->getPos_X();
-    int y=tank->getPos_Y();
+    double x=tank->get_pos_x();
+    double y=tank->get_pos_y();
     if(tank->get_Player()){
 
    this->Direction=tank->get_RotationXY()+90;

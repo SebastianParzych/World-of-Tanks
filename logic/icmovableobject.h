@@ -25,14 +25,16 @@ public:
     qreal get_RotationXY(){return this->RotationXY;}
     void set_Map(CMap *Map){ this->FMap=Map;}
     CMap* get_Map(){ return this->FMap;}
-    int get_Range(){return this->view_range;}
-    int get_Dmg(){ return this->dmg;}
-    void set_Dmg(){this->dmg=dmg;}
+    int get_range(){return this->view_range;}
+    int get_dmg(){ return this->dmg;}
+    void set_dmg(int dmg){this->dmg=dmg;}
     bool get_collsion_shell(){ return this->collision_shell;}
     void set_collision_shell(bool set){this->collision_shell=set;}
     bool get_collsion_tank(){ return this->collision_tank;}
-    void set_collision_tank(bool set){this->collision_tank=set;}
-protected:
+    void set_collision_tank(bool collision_tank){this->collision_tank=collision_tank;}
+    int get_View_range(){ return this->view_range;}
+    void set_View_range(int view_range){this->view_range=view_range;}
+private:
     bool collision_shell=false;
     bool collision_tank=false;
     int dmg;

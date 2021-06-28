@@ -29,7 +29,7 @@ public:
     void set_CurHealth(int health);
     int get_Shells(){return this->ammo;}
     qreal get_TurretRotation(){return this->TurretRotation;}
-    int get_View_range(){ return this->view_range;}
+
     CShell* get_shell(){ return this->shell;}
     int collision_mov(double x , double y); // when QgraphicsItem detec collision witth eg. tank can not move foward.
     void reset_limitations();
@@ -39,7 +39,6 @@ public:
     bool get_wreck(){return wreck;}
     void manage_improv(CImprovements *improv);
 private:
-
     bool wreck=false;
     CTank *focused_enemy;
     QMap <int,bool> limitations;

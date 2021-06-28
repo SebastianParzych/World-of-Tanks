@@ -5,7 +5,8 @@ CGImprovements::CGImprovements(CImprovements *improv)
 {
     color = QColor(0,0,0);
     this->improv=improv;
-    setPos(improv->getPos_X(),improv->getPos_Y());
+
+    setPos(improv->get_pos_x(),improv->get_pos_y());
 }
 
 void CGImprovements::advance(int step)

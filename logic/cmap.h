@@ -17,6 +17,7 @@ public:
     std::deque<ICObject*> getObj(){return this->FObjectList;}
     void addObj(ICObject *obj){ this->FObjectList.push_front(obj);}
     void addObjToDraw(ICGObject *obj){this->FGObjectList.push_front(obj);}
+    void set_walls_patern();
     void freeSpot(int &pos_X, int &pos_Y);
     int get_Width(){ return this->WIDTH;}
     int get_Height(){return this->HEIGHT;}

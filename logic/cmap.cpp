@@ -7,16 +7,16 @@
 #include "gui\cgtank.h"
 #include "gui\cgimprovements.h"
 #include "gui\icgobject.h"
+#include "gui\cgwall.h"
+#include "cwall.h"
 CMap::CMap(int num_of_tanks,int Player_tank,int height, int width)
 {
     this->HEIGHT=height;
     this->WIDTH=width;
     this->num_of_tanks=num_of_tanks; // how many tanks repsawn
     this->Player_tank=Player_tank;
-    BuildMovableObjectMap();
     BuildStaticObjectMap();
-
-
+    BuildMovableObjectMap();
 }
 
 std::deque<ICObject *> CMap::getObjectInRange(ICObject *main_obj)
@@ -24,9 +24,9 @@ std::deque<ICObject *> CMap::getObjectInRange(ICObject *main_obj)
     std::deque<ICObject*> neighbors;
     for (ICObject* object: FObjectList) {
         if(main_obj == object) continue;
-          double x2=qPow(object->getPos_X() - main_obj->getPos_X(),2);
-          double y2=qPow(object->getPos_Y()-main_obj->getPos_Y(),2);
-          if(qSqrt(x2+y2)<static_cast<ICMovableObject*>(main_obj)->get_Range()+5){
+          double x2=qPow(object->get_pos_x() - main_obj->get_pos_y(),2);
+          double y2=qPow(object->get_pos_x()-main_obj->get_pos_y(),2);
+          if(qSqrt(x2+y2)<static_cast<ICMovableObject*>(main_obj)->get_range()+5){
                   object->set_visible(true);
                   neighbors.push_front(object);
           }else{
@@ -48,11 +48,11 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
      do{
          pos_X= QRandomGenerator::global()->bounded(0,HEIGHT);
          pos_Y=QRandomGenerator::global()->bounded(0,WIDTH);
-         if(iter%=10) range-=20;
+         if(iter%10==0) range-=25;
          if(FObjectList.size()==0)return;
          for (ICObject* object: FObjectList) {
-               double x2=qPow(object->getPos_X() - pos_X,2);
-               double y2=qPow(object->getPos_Y()-pos_Y,2);
+               double x2=qPow(object->get_pos_x() - pos_X,2);
+               double y2=qPow(object->get_pos_y()-pos_Y,2);
                if(qSqrt(x2+y2)<range){
                   unique=false;
                   break;
@@ -61,18 +61,48 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
          if(unique)end=true;
      }while(!end);
 }
+void CMap::set_walls_patern() // 1 - 30x 30;
+{
+ int block_chain=QRandomGenerator::global()->bounded(10,50);
+ int pos_x = QRandomGenerator::global()->bounded(0,HEIGHT);
+ int pos_y = QRandomGenerator::global()->bounded(0,WIDTH);
+ int factor=0;
+ do{
+     factor=QRandomGenerator::global()->bounded(-1,2);
+     if(factor == 1 or factor == -1 ){
+      break;
+     }
+ }while(true);
+ freeSpot( pos_x, pos_y);
+ for( int i =0 ; i<block_chain/2; i++){
+     CWall *wall_1= new CWall ();
+     CWall *wall_2= new CWall ();
+     wall_1->set_pos_xy(pos_x,pos_y+factor*i*30);
+     CGWall *gui_wall_1= new CGWall(wall_1);
+     this->FObjectList.push_back(wall_1);
+     this->FGObjectList.push_back(gui_wall_1);
 
+     wall_2->set_pos_xy(pos_x+factor*i*30,pos_y);
+     CGWall *gui_wall_2= new CGWall(wall_2);
+     this->FObjectList.push_back(wall_2);
+     this->FGObjectList.push_back(gui_wall_2);
+ }
+}
 void CMap::BuildStaticObjectMap() // statc objects are always being added to the  end of deque
 {
+    for (int i = 0 ; i <5;i++){
+        set_walls_patern();
+    }
     for (int i = 0 ; i <num_of_tanks;i++){
        int pos_X=0, pos_Y=0;
        freeSpot( pos_X,  pos_Y);
        CImprovements *improv= new  CImprovements();
-       improv->setPosition(pos_X,pos_Y);
+       improv->set_pos_xy(pos_X,pos_Y);
        CGImprovements *gui_improv= new CGImprovements(improv);
        this->FObjectList.push_back(improv);
        this->FGObjectList.push_back(gui_improv);
     }
+
 }
 void CMap::BuildMovableObjectMap()
 {
@@ -85,7 +115,7 @@ void CMap::BuildMovableObjectMap()
        CTank *tank= new CTank(tank_type_random);
        tank->set_Map(this);
        CGTank *gui_tank= new CGTank (tank);
-       tank->setPosition(pos_X,pos_Y);
+       tank->set_pos_xy(pos_X,pos_Y);
        this->FObjectList.push_front(tank);
        this->FGObjectList.push_front(gui_tank);
     }
@@ -97,7 +127,7 @@ void CMap::setPlayerToTank()
     freeSpot(pos_X,pos_Y);
     CTank *tank= new CTank(Player_tank, true);
     CGTank *gui_tank= new CGTank (tank);
-    tank->setPosition(pos_X,pos_Y);
+    tank->set_pos_xy(pos_X,pos_Y);
     tank->set_Map(this);
     this->FObjectList.push_front(tank);
     this->FGObjectList.push_front(gui_tank);

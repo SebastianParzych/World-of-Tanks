@@ -17,8 +17,11 @@ void CGShell::advance(int step)
     if(shell->get_hit()){
         this->set_to_delete(true);
     }
-    int x=shell->getPos_X();
-    int y=shell->getPos_Y();
+    if(shell->get_to_delete()){
+           this->set_to_delete(true);
+    }
+    double x=shell->get_pos_x();
+    double y=shell->get_pos_y();
     setRotation(shell->get_RotationXY()+90);
     setPos(x,y);
 }

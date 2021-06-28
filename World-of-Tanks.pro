@@ -21,12 +21,14 @@ SOURCES += \
     logic/cmap.cpp \
     logic/cshell.cpp \
     logic/ctank.cpp \
+    logic/cwall.cpp \
     logic/icmovableobject.cpp \
     logic/icobject.cpp \
     logic/icstaticobject.cpp \
     logic/main.cpp
 
 HEADERS += \
+    cwall.h \
     gui/cgimprovements.h \
     gui/cgshell.h \
     gui/cgtank.h \
@@ -41,7 +43,8 @@ HEADERS += \
     logic/ctank.h \
     logic/icmovableobject.h \
     logic/icobject.h \
-    logic/icstaticobject.h
+    logic/icstaticobject.h\
+    logic/cwall.h
 
 FORMS += \
     gui/gamewindow.ui \
