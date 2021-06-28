@@ -1,0 +1,26 @@
+var class_i_c_movable_object =
+[
+    [ "ICMovableObject", "class_i_c_movable_object.html#aeebfdeb576ea0e3a39cda1bc173e5676", null ],
+    [ "~ ICMovableObject", "class_i_c_movable_object.html#a0557fd2334948dd5d8cad27070dd4279", null ],
+    [ "Collision_detection", "class_i_c_movable_object.html#a9a36c5c6ff83837acdbc57f23c0526c8", null ],
+    [ "get_angle", "class_i_c_movable_object.html#a208bdb7aecc2cf19f88d764ad77910dc", null ],
+    [ "get_collsion_shell", "class_i_c_movable_object.html#a85e49a207d39d870dbc8c66cd6a1711c", null ],
+    [ "get_collsion_tank", "class_i_c_movable_object.html#ad1782c0c06bee2f8d45c344050b28c78", null ],
+    [ "get_dmg", "class_i_c_movable_object.html#a47daee2d56443f2982a05e27204a8c53", null ],
+    [ "get_explosion_time", "class_i_c_movable_object.html#a6fc7098c7d21d23018c0324dc15e9045", null ],
+    [ "get_Map", "class_i_c_movable_object.html#af70e0574787a22f8bbfd6138317949d0", null ],
+    [ "get_RotationXY", "class_i_c_movable_object.html#abd48757d3cb8a7de7dd83daad94c514b", null ],
+    [ "get_speed", "class_i_c_movable_object.html#a711d8fc00681fd682bfa34275190e05c", null ],
+    [ "get_View_range", "class_i_c_movable_object.html#a86f47cb9eb560786f3a0609f07710de2", null ],
+    [ "move", "class_i_c_movable_object.html#ac2f177b2487390e626919912200ecc67", null ],
+    [ "set_angle", "class_i_c_movable_object.html#a2f7b4c3ce68d696ac536973f5aa7cd24", null ],
+    [ "set_collision_shell", "class_i_c_movable_object.html#a9798ed674cb311cd050884c2045f5c3d", null ],
+    [ "set_collision_tank", "class_i_c_movable_object.html#ae6995fa6dd64b170ca9106abf4a67d97", null ],
+    [ "set_dmg", "class_i_c_movable_object.html#a5dead1a8f0495bf3e616648decb58b29", null ],
+    [ "set_explosion_time", "class_i_c_movable_object.html#af5f5593e55d3ba7a068bd1fb73bab996", null ],
+    [ "set_Map", "class_i_c_movable_object.html#a1c9a5d78520b63b46e6afd15ae73f942", null ],
+    [ "set_RotationXY", "class_i_c_movable_object.html#a4bd30040bf48ad87346719918d5914c2", null ],
+    [ "set_speed", "class_i_c_movable_object.html#a60488138ac429b2fbdae7b65561ea974", null ],
+    [ "set_View_range", "class_i_c_movable_object.html#a7bd425f2a99f1805972e4e1835f2fe61", null ],
+    [ "update", "class_i_c_movable_object.html#a2986a23f68fcd05b922cdfcf7571fc48", null ]
+];

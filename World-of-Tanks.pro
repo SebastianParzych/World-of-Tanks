@@ -9,19 +9,19 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gui/cggrass.cpp \
     gui/cgimprovements.cpp \
     gui/cgshell.cpp \
     gui/cgtank.cpp \
-    gui/cgwall.cpp \
     gui/gamewindow.cpp \
     gui/icgobject.cpp \
     gui/mainwindow.cpp \
     logic/cgame.cpp \
+    logic/cgrass.cpp \
     logic/cimprovements.cpp \
     logic/cmap.cpp \
     logic/cshell.cpp \
     logic/ctank.cpp \
-    logic/cwall.cpp \
     logic/icmovableobject.cpp \
     logic/icobject.cpp \
     logic/icstaticobject.cpp \
@@ -29,22 +29,22 @@ SOURCES += \
 
 HEADERS += \
     cwall.h \
+    gui/cggrass.h \
     gui/cgimprovements.h \
     gui/cgshell.h \
     gui/cgtank.h \
-    gui/cgwall.h \
     gui/gamewindow.h \
     gui/icgobject.h \
     gui/mainwindow.h \
     logic/cgame.h \
+    logic/cgrass.h \
     logic/cimprovements.h \
     logic/cmap.h \
     logic/cshell.h \
     logic/ctank.h \
     logic/icmovableobject.h \
     logic/icobject.h \
-    logic/icstaticobject.h\
-    logic/cwall.h
+    logic/icstaticobject.h
 
 FORMS += \
     gui/gamewindow.ui \

@@ -7,8 +7,8 @@
 #include "gui\cgtank.h"
 #include "gui\cgimprovements.h"
 #include "gui\icgobject.h"
-#include "gui\cgwall.h"
-#include "cwall.h"
+#include "gui\cggrass.h"
+#include "cgrass.h"
 CMap::CMap(int num_of_tanks,int Player_tank,int height, int width)
 {
     this->HEIGHT=height;
@@ -26,7 +26,7 @@ std::deque<ICObject *> CMap::getObjectInRange(ICObject *main_obj)
         if(main_obj == object) continue;
           double x2=qPow(object->get_pos_x() - main_obj->get_pos_y(),2);
           double y2=qPow(object->get_pos_x()-main_obj->get_pos_y(),2);
-          if(qSqrt(x2+y2)<static_cast<ICMovableObject*>(main_obj)->get_range()+5){
+          if(qSqrt(x2+y2)<static_cast<ICMovableObject*>(main_obj)->get_View_range()+5){
                   object->set_visible(true);
                   neighbors.push_front(object);
           }else{
@@ -63,7 +63,7 @@ void CMap::freeSpot(int &pos_X, int &pos_Y)
 }
 void CMap::set_walls_patern() // 1 - 30x 30;
 {
- int block_chain=QRandomGenerator::global()->bounded(10,50);
+ int block_chain=QRandomGenerator::global()->bounded(10,20);
  int pos_x = QRandomGenerator::global()->bounded(0,HEIGHT);
  int pos_y = QRandomGenerator::global()->bounded(0,WIDTH);
  int factor=0;
@@ -75,17 +75,17 @@ void CMap::set_walls_patern() // 1 - 30x 30;
  }while(true);
  freeSpot( pos_x, pos_y);
  for( int i =0 ; i<block_chain/2; i++){
-     CWall *wall_1= new CWall ();
-     CWall *wall_2= new CWall ();
-     wall_1->set_pos_xy(pos_x,pos_y+factor*i*30);
-     CGWall *gui_wall_1= new CGWall(wall_1);
-     this->FObjectList.push_back(wall_1);
-     this->FGObjectList.push_back(gui_wall_1);
+     CGrass *grass_1= new CGrass ();
+     CGrass *grass_2= new CGrass ();
+     grass_1->set_pos_xy(pos_x,pos_y+factor*i*30);
+     CGGrass *gui_grass_1= new CGGrass(grass_1);
+     this->FObjectList.push_back(grass_1);
+     this->FGObjectList.push_back(gui_grass_1);
 
-     wall_2->set_pos_xy(pos_x+factor*i*30,pos_y);
-     CGWall *gui_wall_2= new CGWall(wall_2);
-     this->FObjectList.push_back(wall_2);
-     this->FGObjectList.push_back(gui_wall_2);
+     grass_2->set_pos_xy(pos_x+factor*i*30,pos_y);
+     CGGrass *gui_grass_2= new CGGrass(grass_2);
+     this->FObjectList.push_back(grass_2);
+     this->FGObjectList.push_back(gui_grass_2);
  }
 }
 void CMap::BuildStaticObjectMap() // statc objects are always being added to the  end of deque

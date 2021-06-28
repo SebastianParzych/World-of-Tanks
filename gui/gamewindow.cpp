@@ -4,7 +4,6 @@
 #include "cgtank.h"
 #include <QPen>
 #include <QLineF>
-
 GameWindow::GameWindow(QSize size,int players_num,int tank_type,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow)
@@ -35,14 +34,18 @@ GameWindow::~GameWindow()
 }
 
 void GameWindow::AddObjects(){
+            for (ICGObject *object: game->GetMap()->getObjToDraw()){
+                bool exist = false;
+                   for (QGraphicsItem *item: scene->items()) {
 
-    if((game->GetMap()->getObjToDraw()).size()<this->map_elements){
-        this->map_elements=game->GetMap()->getObjToDraw().size();
-    }
-    if((game->GetMap()->getObjToDraw()).size()>this->map_elements){
-        scene->addItem(game->GetMap()->getObjToDraw().front());
-        this->map_elements=game->GetMap()->getObjToDraw().size();
-    }
+                        if(object == item){
+                            exist = true;
+                        }
+                 }
+                   if(!exist){
+                       scene->addItem(object);
+                   }
+            }
 }
 
 void GameWindow::SetObjects(CMap *map)

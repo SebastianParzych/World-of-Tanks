@@ -320,12 +320,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>518</x>
-     <y>477</y>
+     <x>468</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
-     <x>558</x>
-     <y>476</y>
+     <x>560</x>
+     <y>469</y>
     </hint>
    </hints>
   </connection>
@@ -336,12 +336,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>519</x>
-     <y>511</y>
+     <x>504</x>
+     <y>506</y>
     </hint>
     <hint type="destinationlabel">
-     <x>554</x>
-     <y>514</y>
+     <x>563</x>
+     <y>516</y>
     </hint>
    </hints>
   </connection>

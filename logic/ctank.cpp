@@ -4,7 +4,7 @@
 #include <QRandomGenerator>
 #include <logic\cmap.h>
 #include <cmath>
-#include "gui/cgwall.h"
+#include "gui/cggrass.h"
 #include "gui/cgimprovements.h"
 #include "gui/cgtank.h"
 constexpr qreal Pi = M_PI;
@@ -33,7 +33,6 @@ CTank::CTank(int TankType, bool isplayer) {
     limitations[0]=true;
     limitations[1]=true;
 }
-
 
 void CTank::move()
 {
@@ -131,7 +130,6 @@ void CTank::avoid_collision(ICObject* enemy, float  dx, float dy)
 
 }
 
-
 void CTank::move( int y, int rotation, int  turretRotation)
 {
     if(wreck) return;
@@ -152,7 +150,7 @@ void CTank::move( int y, int rotation, int  turretRotation)
     this->TurretRotation=normalizeAngle(TurretRotation+turretRotation*TurretSpeed);
 }
 
-int CTank::collision_mov(double x, double y)
+void CTank::collision_mov(double x, double y)
 {
     float distance =get_distance(x,y,0,0);
     set_angle((normalizeAngle(get_RotationXY()))*M_PI/180);
@@ -193,14 +191,17 @@ void CTank::Collision_detection(QList<QGraphicsItem *> items)
             this->manage_improv(improv);
             improv->set_Open(true);
         }
-        this->set_collision_tank(true);
-        this->collision_mov(item->x(), item->y());
+        if(item == dynamic_cast<CGTank*>(item)){
+            this->set_collision_tank(true);
+            this->collision_mov(item->x(), item->y());
+        }
+
     }
 
     if(get_collsion_tank()){
         bool release=true;
         foreach(QGraphicsItem *item,items){
-            if( item== dynamic_cast<CGTank*>(item) or item == dynamic_cast<CGWall*>(item)){
+            if( item== dynamic_cast<CGTank*>(item) or item == dynamic_cast<CGGrass*>(item)){
                 release=false;
                 break;
             }
@@ -387,5 +388,7 @@ void CTank::manage_improv(CImprovements *improv)
         return;
     }
 }
+
+
 
 

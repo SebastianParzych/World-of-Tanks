@@ -35,7 +35,7 @@ CGTank::CGTank(CTank *tank): tank(tank), tankAngle(tank->get_RotationXY()),
     }
      setPos(tank->get_pos_x(),tank->get_pos_y());
      setRotation(Direction);
-     explosion_time=0;
+     tank->set_explosion_time(0);
 }
 
 CGTank::CGTank(int tanktype)
@@ -139,11 +139,11 @@ void CGTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget 
         painter->drawEllipse(-16,-16,32,32);
         painter->setBrush(Qt::DiagCrossPattern);
         painter->drawEllipse(-12,-10,25,25);// turret
-        if(clock()-explosion_time<600){
+        if(clock()-tank->get_explosion_time()<600){
              painter->setBrush(Qt::blue);
         }else {
             painter->setBrush(turret);
-            explosion_time=0;
+            tank->set_explosion_time(0);
             }
         painter->drawEllipse(-1,-5,15,15); // cupola
 
@@ -181,11 +181,11 @@ void CGTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget 
         painter->drawRect(-1,-10,10,10);// turret
         painter->drawRect(-11,-10,10,10);// turret
            painter->drawRect(-13.5,-15,15,10);// turret
-        if(clock()-explosion_time<600){
+        if(clock()-tank->get_explosion_time()<600){
              painter->setBrush(Qt::blue);
         }else {
             painter->setBrush(turret);
-            explosion_time=0;
+            tank->set_explosion_time(0);
             }
         painter->drawRect(-1,5,10,10); // cupola
 
@@ -222,11 +222,11 @@ void CGTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget 
         painter->setBrush(turret);
         painter->drawEllipse(-13.5,-13,25,25);
         painter->drawRect(-7,-10,12,18);// turret
-        if(clock()-explosion_time<400){
+        if(clock()-tank->get_explosion_time()<400){
              painter->setBrush(Qt::blue);
         }else {
             painter->setBrush(turret);
-            explosion_time=0;
+            tank->set_explosion_time(0);
             }
         painter->drawEllipse(-1,-5,10,10); // cupola
         break;

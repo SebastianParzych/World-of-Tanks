@@ -1,7 +1,7 @@
 #include "cshell.h"
 #include <QDebug>
 #include "gui/cgtank.h"
-
+#include "gui/cggrass.h"
 
 constexpr qreal Pi = M_PI;
 constexpr qreal TwoPi = 2 * M_PI;
@@ -11,11 +11,8 @@ CShell::CShell(int pos_x,int pos_y,qreal TankRotation,qreal TurretRotation,int p
     set_View_range(1);
     set_RotationXY(TankRotation);
     set_dmg(dmg);
-//    this->view_range=1;
-//    this->RotationXY=TankRotation;
     this->TurretRotation=TurretRotation;
     this->penetration=penetration;
-    //this->dmg=dmg;
     this->Shell_speed=Shell_speed;
     set_pos_xy(pos_x,pos_y);
     TankRotation=TankRotation*M_PI/180;
@@ -32,8 +29,6 @@ void CShell::move()
     double new_x=old_x-cos(Direction)*Shell_speed;
     double old_y=get_pos_y();
     double new_y=old_y-sin(Direction)*Shell_speed;
-//    this->pos_x+=-cos(Direction)*Shell_speed;
-//    this->pos_y+=-sin(Direction)*Shell_speed;
     set_pos_xy(new_x,new_y);
         if(get_pos_x()>2000 or get_pos_x()<-100 or get_pos_y()<-100 or get_pos_y()>1000){ // force to back to map
                this->set_to_delete(true);

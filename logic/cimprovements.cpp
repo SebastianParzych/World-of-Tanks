@@ -2,7 +2,6 @@
 
 #include <QRandomGenerator>
 CImprovements::CImprovements() : ICStaticObject(){
-   // set_angle(0);
     stat=QRandomGenerator::global()->bounded(0,9);
     quality=QRandomGenerator::global()->bounded(0,10);
 
