@@ -10,7 +10,7 @@ There are three aviable classes of tanks, which can appear in battlefield:
 * **Heavy Tank**- The slowest vehicle with the biggest number of health points. It also deals the most damage with a single shell.
 #### The main parameters are presented above, in fact, there are more of them, e.g. reverse speed, rotation speed, turret rotation speed.
 ### Features 
-* Each tank on the battlefield can see opponents, which are in tank's view range. When an enemy comes into line of sight of a computer-controlled tank, he is automatically detected, and the computer starts tracking the enemy vehicle with a gun and then fires a shot.  
+* Each tank on the battlefield can see opponents, which are in tank's view range. When an enemy comes into line of sight of a computer-controlled tank, it is automatically detected, and the computer starts tracking the enemy vehicle with a gun and then fires a shot.  
 * Each opponent can focus on two tanks at the same time. first - The tank it aims at. 2- The tank or obstacle closest to the enemy. Thanks to that, there are rarely collisions between vehicles. 
 * After leaving the map, the tank immediately goes to the center of the map.
 * Depending on the number of vehicles on the battlefield, chests containing random tank upgrades are created on the map.
